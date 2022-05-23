@@ -55,6 +55,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               ),
             ),
             onTap: () => print("Tapping Favourites"),
+            hoverColor: Colors.white,
           ),
           ListTile(
             leading: Icon(Icons.share),
