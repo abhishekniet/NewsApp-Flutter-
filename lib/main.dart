@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news/home.dart';
+import 'package:news/registration.dart';
+import 'package:news/loginscreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: loginScreen(),
     );
   }
 }

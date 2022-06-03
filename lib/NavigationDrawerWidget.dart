@@ -17,8 +17,8 @@ class NavigationDrawerWidget extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             arrowColor: Colors.green,
-            accountName: Text("Abhishek"),
-            accountEmail: Text("abhishek@gmail.com"),
+            accountName: Text("HITESH"),
+            accountEmail: Text("hitesh@gmail.com"),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.asset(
@@ -55,6 +55,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               ),
             ),
             onTap: () => print("Tapping Favourites"),
+            hoverColor: Colors.white,
           ),
           ListTile(
             leading: Icon(Icons.share),

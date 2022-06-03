@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart';
+import 'package:news/category.dart';
 import 'NavigationDrawerWidget.dart';
 import 'model.dart';
 
@@ -126,7 +127,11 @@ class _HomeState extends State<Home> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          print(navBarItem[index]);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Category(Query: navBarItem[index])));
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
@@ -147,55 +152,60 @@ class _HomeState extends State<Home> {
                     })),
             Container(
               margin: EdgeInsets.symmetric(vertical: 15),
-              child: CarouselSlider(
-                options: CarouselOptions(
-                    height: 200, autoPlay: true, enlargeCenterPage: true),
-                items: newsModelListCarousel.map((instance) {
-                  return Builder(builder: (BuildContext context) {
-                    return Container(
-                        child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Stack(children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    instance.newsImg,
-                                    fit: BoxFit.fitHeight,
-                                    width: double.infinity,
-                                  )),
-                              Positioned(
-                                  left: 0,
-                                  right: 0,
-                                  bottom: 0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
+              child: isLoading
+                  ? CircularProgressIndicator()
+                  : CarouselSlider(
+                      options: CarouselOptions(
+                          height: 200, autoPlay: true, enlargeCenterPage: true),
+                      items: newsModelListCarousel.map((instance) {
+                        return Builder(builder: (BuildContext context) {
+                          return Container(
+                              child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Stack(children: [
+                                    ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        gradient: LinearGradient(
-                                            colors: [
-                                              Colors.black12.withOpacity(0),
-                                              Colors.black
-                                            ],
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter)),
-                                    child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 10),
+                                        child: Image.network(
+                                          instance.newsImg,
+                                          fit: BoxFit.fitHeight,
+                                          width: double.infinity,
+                                        )),
+                                    Positioned(
+                                        left: 0,
+                                        right: 0,
+                                        bottom: 0,
                                         child: Container(
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: Text(
-                                              instance.newsHead,
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            ))),
-                                  )),
-                            ])));
-                  });
-                }).toList(),
-              ),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              gradient: LinearGradient(
+                                                  colors: [
+                                                    Colors.black12
+                                                        .withOpacity(0),
+                                                    Colors.black
+                                                  ],
+                                                  begin: Alignment.topCenter,
+                                                  end: Alignment.bottomCenter)),
+                                          child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 5, vertical: 10),
+                                              child: Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  child: Text(
+                                                    instance.newsHead,
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ))),
+                                        )),
+                                  ])));
+                        });
+                      }).toList(),
+                    ),
             ),
             Container(
               child: Column(
@@ -289,7 +299,14 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                            onPressed: () {}, child: Text("SHOW MORE")),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Category(Query: "Technology")));
+                            },
+                            child: Text("SHOW MORE")),
                       ],
                     ),
                   )
