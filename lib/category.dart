@@ -16,13 +16,29 @@ class _CategoryState extends State<Category> {
   bool isLoading = true;
   getNewsByQuery(Query) async {
     String url = "";
-    if (Query == "Top News" || Query == 'India') {
+    if (Query == "Top News" || Query == 'India' || Query == 'india') {
       url =
           "https://newsapi.org/v2/top-headlines?country=In&apiKey=9446b0c6b2ef4c16989531660f4692b2";
-    } else if (Query) {
+    } else if (Query == 'US' || Query == 'us' || Query == 'World') {
       url =
-          "https://newsapi.org/v2/everything?q=$Query&from=2022-04-23&sortBy=publishedAt&apiKey=9446b0c6b2ef4c16989531660f4692b2";
-    }
+          "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=9446b0c6b2ef4c16989531660f4692b2";
+    } else if (Query == 'Finance' || Query == 'finance') {
+      url =
+          "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=9446b0c6b2ef4c16989531660f4692b2";
+    } else if (Query == 'Health' || Query == 'health') {
+      url =
+          "https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=9446b0c6b2ef4c16989531660f4692b2";
+    } else if (Query == 'apple' || Query == 'Apple') {
+      url =
+          "https://newsapi.org/v2/everything?q=apple&from=2022-06-15&to=2022-06-15&sortBy=popularity&apiKey=9446b0c6b2ef4c16989531660f4692b2";
+    } else if (Query == 'tesla' || Query == 'Tesla') {
+      url =
+          "https://newsapi.org/v2/everything?q=tesla&from=2022-05-16&sortBy=publishedAt&apiKey=9446b0c6b2ef4c16989531660f4692b2";
+    } else
+      (Query) {
+        url =
+            "https://newsdata.io/api/1/news?apikey=pub_8400b82ad4405c34d14a65bd4d95fa740d51&q=$Query&language=en";
+      };
     Response response = await get(Uri.parse(url));
     Map data = jsonDecode(response.body);
     setState(() {
@@ -49,6 +65,7 @@ class _CategoryState extends State<Category> {
     return Scaffold(
       appBar: AppBar(
         title: Text("News"),
+        backgroundColor: Colors.red,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
