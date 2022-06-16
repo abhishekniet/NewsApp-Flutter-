@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'dart:ui';
 
-import 'home.dart';
-import 'model.dart';
-import 'main.dart';
 import 'package:flutter/material.dart';
+import 'package:news/Favourites.dart';
+import 'package:news/Friends.dart';
+import 'package:news/Settings.dart';
+import 'package:share/share.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = EdgeInsets.symmetric(horizontal: 20);
@@ -35,16 +37,18 @@ class NavigationDrawerWidget extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text(
-              "Favourites",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+              leading: Icon(Icons.favorite),
+              title: Text(
+                "Favourites",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            onTap: () => print("Tapping Favourites"),
-          ),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Favourites()));
+              }),
           ListTile(
             leading: Icon(Icons.people),
             title: Text(
@@ -54,7 +58,10 @@ class NavigationDrawerWidget extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            onTap: () => print("Tapping Favourites"),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Friends()));
+            },
             hoverColor: Colors.white,
           ),
           ListTile(
@@ -66,7 +73,10 @@ class NavigationDrawerWidget extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            onTap: () => print("Tapping Favourites"),
+            onTap: () {
+              Share.share(
+                  "https://play.google.com/store/apps/details?id=com.dts.freefiremax");
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),
@@ -77,7 +87,10 @@ class NavigationDrawerWidget extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            onTap: () => print("Tapping Favourites"),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Settings()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
@@ -88,7 +101,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            onTap: () => print("Tapping Favourites"),
+            onTap: () => exit(0),
           ),
         ],
       ),

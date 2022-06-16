@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
 
   getNewsByQuery() async {
     String url =
-        "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=9446b0c6b2ef4c16989531660f4692b2";
+        "https://newsapi.org/v2/everything?q=India&apiKey=9446b0c6b2ef4c16989531660f4692b2";
     Response response = await get(Uri.parse(url));
     Map data = jsonDecode(response.body);
     setState(() {
@@ -107,7 +107,11 @@ class _HomeState extends State<Home> {
                     if ((searchController.text).replaceAll(" ", "") == "") {
                       print("Blank search");
                     } else {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => Search(searchController.text)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Category(Query: searchController.text)));
                     }
                   },
                   child: Container(
@@ -123,7 +127,10 @@ class _HomeState extends State<Home> {
                     controller: searchController,
                     textInputAction: TextInputAction.search,
                     onSubmitted: (value) {
-                      print(value);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Category(Query: value)));
                     },
                     decoration: InputDecoration(
                         border: InputBorder.none, hintText: "Search..."),
